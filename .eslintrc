@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "@piktew/eslint-config-node"
+  ],
+  "rules": {
+    "no-underscore-dangle": "off",
+    "import/no-extraneous-dependencies": "off"
+  }
+}

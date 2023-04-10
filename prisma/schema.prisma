@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Org {
+  id            String @id @default(uuid())
+  email         String @unique
+  password_hash String
+
+  name     String
+  address  String
+  zip      String
+  whatsapp String
+
+  Pet Pet[]
+
+  @@map("orgs")
+}
+
+model Pet {
+  id           String @id @default(uuid())
+  name         String
+  description  String
+  city         String
+  age          String
+  size         String
+  type         String
+  independence String
+  energy       Int
+  photo        String
+
+  org    Org    @relation(fields: [org_id], references: [id])
+  org_id String
+
+  petGallery PetGallery[]
+
+  updated_at DateTime @updatedAt
+  created_at DateTime @default(now())
+
+  @@map("pets")
+}
+
+model PetGallery {
+  id     String @id @default(uuid())
+  photo  String
+  pet    Pet    @relation(fields: [pet_id], references: [id])
+  pet_id String
+
+  updated_at DateTime @updatedAt
+  created_at DateTime @default(now())
+
+  @@map("pet_gallery")
+}

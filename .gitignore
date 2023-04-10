@@ -1,0 +1,7 @@
+node_modules
+build
+.env
+coverage
+*.db
+*.db-journal
+prisma/seed.ts
